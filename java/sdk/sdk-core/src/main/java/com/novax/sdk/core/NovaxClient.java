@@ -1,7 +1,6 @@
 package com.novax.sdk.core;
 
 import com.novax.sdk.core.auth.AccessKeyCredentials;
-import com.novax.sdk.core.exception.NovaxApiException;
 import com.novax.sdk.core.exception.NovaxTransportException;
 import com.novax.sdk.core.http.Interceptor;
 import com.novax.sdk.core.http.InterceptorChain;
@@ -47,7 +46,7 @@ public final class NovaxClient {
         return new Builder();
     }
 
-    public <R> R execute(ApiRequest<R> request) {
+    public <R> ReturnResult<R> execute(ApiRequest<R> request) {
         SdkRequest sdkReq = SdkRequest.from(config.endpoint(), request, config.jsonMapper());
         SdkResponse resp;
         try {
@@ -59,10 +58,9 @@ public final class NovaxClient {
                 .readReturnResult(resp.body(), request.responseType());
         if (!wrapped.isSuccess()) {
             LOG.log(Level.WARNING, () -> "business error: " + sdkReq.method() + " " + sdkReq.uri()
-                    + " code=" + wrapped.code() + " message=" + wrapped.message());
-            throw new NovaxApiException(wrapped.code(), wrapped.message());
+                    + " code=" + wrapped.code() + " message=" + wrapped.msg());
         }
-        return wrapped.data();
+        return wrapped;
     }
 
     public static final class Builder {

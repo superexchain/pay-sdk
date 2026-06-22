@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public record ReturnResult<T>(
         Integer code,
-        String message,
+        String msg,
         T data
 ) {
 
     @JsonCreator
     public ReturnResult(
             @JsonProperty("code") Integer code,
-            @JsonProperty("message") String message,
+            @JsonProperty("msg") String msg,
             @JsonProperty("data") T data
     ) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
         this.data = data;
     }
 

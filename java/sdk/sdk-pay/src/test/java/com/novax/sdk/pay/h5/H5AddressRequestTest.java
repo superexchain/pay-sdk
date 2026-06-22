@@ -4,27 +4,19 @@ import com.novax.sdk.core.NovaxClient;
 import com.novax.sdk.core.exception.NovaxException;
 import com.novax.sdk.core.model.ReturnResult;
 import com.novax.sdk.core.http.interceptors.LoggingInterceptor;
-import org.junit.jupiter.api.Test;
+import com.novax.sdk.pay.model.PayOrderAddressResp;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.platform.commons.util.StringUtils;
 
-import java.math.BigDecimal;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * Drives a {@link PayTokenRequest} through {@link NovaxClient} with a stub
- * transport so we can assert on the exact wire shape — including signature
- * headers, the absence of {@code userId} (server injects it), and the parsed
- * response.
- */
-class PayTokenRequestTest {
+class H5AddressRequestTest {
 
     private static final String ACCESS_KEY = "FEafqZrMaphQ3rgsqaLEXT_PZ7r_qZddGLRqXzR3XSw7NB-EVmb41jVdy9gVTwVD";
     private static final String ACCESS_SECRET = "oiAKpoyvTJ24NOL38cUtQNutBAqVeF0oH5J-AZf7_cWz3E6-wFgMuVNt7JDtF9r2";
-    // server returns ReturnResult<String> — data is the raw token string, not an object
 
     private static final NovaxClient CLIENT = NovaxClient.builder()
             .endpoint("https://api.novax.dev/api")
@@ -37,23 +29,26 @@ class PayTokenRequestTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0, true",
-            "1.1, false",
-            "1.0, false",
-            "1.000, false",
-            "999, false"})
-    void execute_signsAndIssuesGet_omitsUserId_parsesToken(BigDecimal number, boolean expectException) {
+            "invalid_token, true",
+            "real_token_here, false"
+    })
+    void execute_h5Address(String token, boolean expectException) {
         try {
-            ReturnResult<PayTokenResponse> resp = CLIENT.execute(
-                    PayTokenRequest.builder().receiptOrderId("1234").currencyNumber(number).build()
+            ReturnResult<PayOrderAddressResp> resp = CLIENT.execute(
+                    H5AddressRequest.builder()
+                            .protocol("TRC20")
+                            .currency("USDT")
+                            .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+                            .companyUserId("test_user")
+                            .token(token)
+                            .build()
             );
-            System.out.println(resp.data().token());
+            System.out.println(resp);
             assertFalse(expectException);
-            assertTrue(StringUtils.isNotBlank(resp.data().token()));
+            assertNotNull(resp);
         } catch (Exception e) {
             assertTrue(expectException);
             assertInstanceOf(NovaxException.class, e);
         }
     }
-
 }

@@ -17,12 +17,16 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Sole entry point. Adding a new endpoint never requires touching this class —
  * just pass an {@link ApiRequest} of any shape to {@link #execute}.
  */
 public final class NovaxClient {
+
+    private static final Logger LOG = Logger.getLogger(NovaxClient.class.getName());
 
     private final NovaxConfig config;
     private final InterceptorChain chain;
@@ -54,6 +58,8 @@ public final class NovaxClient {
         ReturnResult<R> wrapped = config.jsonMapper()
                 .readReturnResult(resp.body(), request.responseType());
         if (!wrapped.isSuccess()) {
+            LOG.log(Level.WARNING, () -> "business error: " + sdkReq.method() + " " + sdkReq.uri()
+                    + " code=" + wrapped.code() + " message=" + wrapped.message());
             throw new NovaxApiException(wrapped.code(), wrapped.message());
         }
         return wrapped.data();

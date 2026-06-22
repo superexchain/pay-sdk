@@ -11,7 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** GET /pay/v3/receipt/orders — query receipt orders. */
+/**
+ * GET /pay/v3/receipt/orders — query receipt orders.
+ */
 @Getter
 @Builder
 public class ReceiptOrdersRequest extends AbstractApiRequest<List<ReceiptOrderResp>> {
@@ -20,10 +22,18 @@ public class ReceiptOrdersRequest extends AbstractApiRequest<List<ReceiptOrderRe
     private final Integer orderStatus;
     private final Integer status;
 
-    @Override public HttpMethod method() { return HttpMethod.GET; }
-    @Override public String path() { return "/pay/v3/receipt/orders"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.GET;
+    }
 
-    @Override public Map<String, ?> queryParams() {
+    @Override
+    public String path() {
+        return "/pay/v3/receipt/orders";
+    }
+
+    @Override
+    public Map<String, ?> queryParams() {
         Map<String, Object> q = new LinkedHashMap<>();
         if (receiptOrderIds != null) q.put("receiptOrderIds", receiptOrderIds);
         if (orderStatus != null) q.put("orderStatus", orderStatus);
@@ -31,7 +41,9 @@ public class ReceiptOrdersRequest extends AbstractApiRequest<List<ReceiptOrderRe
         return q;
     }
 
-    @Override public TypeRef<List<ReceiptOrderResp>> responseType() {
-        return new TypeRef<>() {};
+    @Override
+    public TypeRef<List<ReceiptOrderResp>> responseType() {
+        return new TypeRef<>() {
+        };
     }
 }

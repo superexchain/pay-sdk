@@ -73,7 +73,9 @@ public final class NovaxClient {
             return this;
         }
 
-        /** Sent as the {@code ip} header — used for the server-side IP whitelist check. */
+        /**
+         * Sent as the {@code ip} header — used for the server-side IP whitelist check.
+         */
         public Builder clientIp(String ip) {
             cfg.defaultHeader("ip", ip);
             return this;
@@ -89,8 +91,10 @@ public final class NovaxClient {
             return this;
         }
 
-        /** <b>DEV ONLY.</b> Trust any TLS cert — for hitting internal /
-         *  self-signed hosts. Never enable in production. */
+        /**
+         * <b>DEV ONLY.</b> Trust any TLS cert — for hitting internal /
+         * self-signed hosts. Never enable in production.
+         */
         public Builder insecureTls() {
             cfg.insecureTls();
             return this;

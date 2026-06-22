@@ -11,7 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** GET /pay/v3/withdraw/orders — query withdraw orders. */
+/**
+ * GET /pay/v3/withdraw/orders — query withdraw orders.
+ */
 @Getter
 @Builder
 public class WithdrawOrdersRequest extends AbstractApiRequest<List<WithdrawOrderResp>> {
@@ -19,17 +21,27 @@ public class WithdrawOrdersRequest extends AbstractApiRequest<List<WithdrawOrder
     private final String withdrawOrderIds;
     private final Integer status;
 
-    @Override public HttpMethod method() { return HttpMethod.GET; }
-    @Override public String path() { return "/pay/v3/withdraw/orders"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.GET;
+    }
 
-    @Override public Map<String, ?> queryParams() {
+    @Override
+    public String path() {
+        return "/pay/v3/withdraw/orders";
+    }
+
+    @Override
+    public Map<String, ?> queryParams() {
         Map<String, Object> q = new LinkedHashMap<>();
         if (withdrawOrderIds != null) q.put("withdrawOrderIds", withdrawOrderIds);
         if (status != null) q.put("status", status);
         return q;
     }
 
-    @Override public TypeRef<List<WithdrawOrderResp>> responseType() {
-        return new TypeRef<>() {};
+    @Override
+    public TypeRef<List<WithdrawOrderResp>> responseType() {
+        return new TypeRef<>() {
+        };
     }
 }

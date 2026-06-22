@@ -1,6 +1,8 @@
 package com.novax.sdk.core.exception;
 
-/** Thrown when the server returns a non-success business code in {@code ReturnResult}. */
+/**
+ * Thrown when the server returns a non-success business code in {@code ReturnResult}.
+ */
 public class NovaxApiException extends NovaxException {
 
     private final Integer code;

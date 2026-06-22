@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-/** Thin Jackson wrapper. Hidden behind a facade so the rest of the SDK never
- *  imports {@code ObjectMapper} directly. */
+/**
+ * Thin Jackson wrapper. Hidden behind a facade so the rest of the SDK never
+ * imports {@code ObjectMapper} directly.
+ */
 public final class JsonMapper {
 
     private final ObjectMapper mapper;

@@ -24,7 +24,9 @@ public interface ApiRequest<R> {
         return Map.of();
     }
 
-    /** Returns the request body (will be JSON-serialised), or {@code null}. */
+    /**
+     * Returns the request body (will be JSON-serialised), or {@code null}.
+     */
     default Object body() {
         return null;
     }

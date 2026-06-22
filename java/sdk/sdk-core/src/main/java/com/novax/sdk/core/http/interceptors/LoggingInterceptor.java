@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Minimal stdout/stderr-style request logger. Replace with SLF4J/Logback at will. */
+/**
+ * Minimal stdout/stderr-style request logger. Replace with SLF4J/Logback at will.
+ */
 public final class LoggingInterceptor implements Interceptor {
 
     private static final Logger LOG = Logger.getLogger(LoggingInterceptor.class.getName());

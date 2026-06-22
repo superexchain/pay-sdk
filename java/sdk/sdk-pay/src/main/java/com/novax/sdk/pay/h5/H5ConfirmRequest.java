@@ -9,7 +9,9 @@ import lombok.Getter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** POST /pay/public/h5/confirm — user clicks "confirm" on the H5 pay page. */
+/**
+ * POST /pay/public/h5/confirm — user clicks "confirm" on the H5 pay page.
+ */
 @Getter
 @Builder
 public class H5ConfirmRequest extends AbstractApiRequest<Object> {
@@ -20,10 +22,18 @@ public class H5ConfirmRequest extends AbstractApiRequest<Object> {
     private final String companyUserId;
     private final String token;
 
-    @Override public HttpMethod method() { return HttpMethod.POST; }
-    @Override public String path() { return "/pay/public/h5/confirm"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.POST;
+    }
 
-    @Override public Object body() {
+    @Override
+    public String path() {
+        return "/pay/public/h5/confirm";
+    }
+
+    @Override
+    public Object body() {
         Map<String, Object> b = new LinkedHashMap<>();
         b.put("protocol", protocol);
         b.put("currency", currency);
@@ -33,7 +43,8 @@ public class H5ConfirmRequest extends AbstractApiRequest<Object> {
         return b;
     }
 
-    @Override public TypeRef<Object> responseType() {
+    @Override
+    public TypeRef<Object> responseType() {
         return TypeRef.of(Object.class);
     }
 }

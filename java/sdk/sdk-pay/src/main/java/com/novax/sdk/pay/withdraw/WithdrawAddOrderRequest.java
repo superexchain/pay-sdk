@@ -11,7 +11,9 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** POST /pay/v3/withdraw/order/add — create a withdraw order. */
+/**
+ * POST /pay/v3/withdraw/order/add — create a withdraw order.
+ */
 @Getter
 @Builder
 public class WithdrawAddOrderRequest extends AbstractApiRequest<WithdrawOrderResp> {
@@ -25,10 +27,18 @@ public class WithdrawAddOrderRequest extends AbstractApiRequest<WithdrawOrderRes
     private final BigDecimal currencyNumber;
     private final String callBackUrl;
 
-    @Override public HttpMethod method() { return HttpMethod.POST; }
-    @Override public String path() { return "/pay/v3/withdraw/order/add"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.POST;
+    }
 
-    @Override public Object body() {
+    @Override
+    public String path() {
+        return "/pay/v3/withdraw/order/add";
+    }
+
+    @Override
+    public Object body() {
         Map<String, Object> b = new LinkedHashMap<>();
         b.put("withdrawOrderId", withdrawOrderId);
         b.put("type", type);
@@ -41,7 +51,8 @@ public class WithdrawAddOrderRequest extends AbstractApiRequest<WithdrawOrderRes
         return b;
     }
 
-    @Override public TypeRef<WithdrawOrderResp> responseType() {
+    @Override
+    public TypeRef<WithdrawOrderResp> responseType() {
         return TypeRef.of(WithdrawOrderResp.class);
     }
 }

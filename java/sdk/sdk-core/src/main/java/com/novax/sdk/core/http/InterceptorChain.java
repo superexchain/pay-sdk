@@ -3,7 +3,9 @@ package com.novax.sdk.core.http;
 import java.io.IOException;
 import java.util.List;
 
-/** Drives the interceptor chain and hands the final request to the transport. */
+/**
+ * Drives the interceptor chain and hands the final request to the transport.
+ */
 public final class InterceptorChain {
 
     private final HttpTransport transport;

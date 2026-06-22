@@ -36,7 +36,11 @@ public final class JdkHttpTransport implements HttpTransport {
     @Override
     public SdkResponse execute(SdkRequest req) throws IOException {
         HttpRequest.Builder b = HttpRequest.newBuilder(req.uri()).timeout(requestTimeout);
-        req.headers().forEach(b::header);
+        // emit one .header() call per value — repeated invocations add to the
+        // same header name without overwriting (multi-value HTTP)
+        req.headers().forEach((name, values) -> {
+            for (String v : values) b.header(name, v);
+        });
         HttpRequest.BodyPublisher publisher = req.body() == null
                 ? HttpRequest.BodyPublishers.noBody()
                 : HttpRequest.BodyPublishers.ofByteArray(req.body());
@@ -61,9 +65,18 @@ public final class JdkHttpTransport implements HttpTransport {
     public static SSLContext insecureTrustAllSslContext() {
         TrustManager[] trustAll = new TrustManager[]{
                 new X509TrustManager() {
-                    @Override public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
-                    @Override public void checkClientTrusted(X509Certificate[] chain, String authType) { }
-                    @Override public void checkServerTrusted(X509Certificate[] chain, String authType) { }
+                    @Override
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[0];
+                    }
+
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) {
+                    }
+
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                    }
                 }
         };
         try {

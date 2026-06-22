@@ -33,7 +33,8 @@ public final class SignatureCodec {
 
     private static final String HMAC_SHA256 = "HmacSHA256";
 
-    private SignatureCodec() {}
+    private SignatureCodec() {
+    }
 
     public static String dataToSign(HttpMethod method, URI uri, byte[] body,
                                     long timestampMs, JsonMapper jsonMapper) {

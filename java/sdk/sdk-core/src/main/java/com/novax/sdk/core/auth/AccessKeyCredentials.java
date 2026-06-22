@@ -18,6 +18,11 @@ public final class AccessKeyCredentials implements Credentials {
         this.accessSecret = Objects.requireNonNull(accessSecret, "accessSecret");
     }
 
-    public String accessKey() { return accessKey; }
-    public String accessSecret() { return accessSecret; }
+    public String accessKey() {
+        return accessKey;
+    }
+
+    public String accessSecret() {
+        return accessSecret;
+    }
 }

@@ -21,16 +21,26 @@ public class ReceiptProtocolsRequest extends AbstractApiRequest<List<PayProtocol
 
     private final Integer type;
 
-    @Override public HttpMethod method() { return HttpMethod.GET; }
-    @Override public String path() { return "/pay/v3/protocols"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.GET;
+    }
 
-    @Override public Map<String, ?> queryParams() {
+    @Override
+    public String path() {
+        return "/pay/v3/protocols";
+    }
+
+    @Override
+    public Map<String, ?> queryParams() {
         Map<String, Object> q = new LinkedHashMap<>();
         q.put("type", type != null ? type : 1);
         return q;
     }
 
-    @Override public TypeRef<List<PayProtocolsResp>> responseType() {
-        return new TypeRef<>() {};
+    @Override
+    public TypeRef<List<PayProtocolsResp>> responseType() {
+        return new TypeRef<>() {
+        };
     }
 }

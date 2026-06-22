@@ -26,20 +26,39 @@ public class H5AddressRequest extends AbstractApiRequest<PayOrderAddressResp> {
     private final String companyUserId;
     private final String token;
 
-    @Override public HttpMethod method() { return HttpMethod.GET; }
-    @Override public String path() { return "/pay/public/h5/address"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.GET;
+    }
 
-    @Override public Map<String, ?> queryParams() {
+    @Override
+    public String path() {
+        return "/pay/public/h5/address";
+    }
+
+    @Override
+    public Map<String, ?> queryParams() {
         Map<String, Object> q = new LinkedHashMap<>();
-        if (protocol != null) q.put("protocol", protocol);
-        if (currency != null) q.put("currency", currency);
-        if (smartContractAddress != null) q.put("smartContractAddress", smartContractAddress);
-        if (companyUserId != null) q.put("companyUserId", companyUserId);
-        if (token != null) q.put("token", token);
+        if (protocol != null) {
+            q.put("protocol", protocol);
+        }
+        if (currency != null) {
+            q.put("currency", currency);
+        }
+        if (smartContractAddress != null) {
+            q.put("smartContractAddress", smartContractAddress);
+        }
+        if (companyUserId != null) {
+            q.put("companyUserId", companyUserId);
+        }
+        if (token != null) {
+            q.put("token", token);
+        }
         return q;
     }
 
-    @Override public TypeRef<PayOrderAddressResp> responseType() {
+    @Override
+    public TypeRef<PayOrderAddressResp> responseType() {
         return TypeRef.of(PayOrderAddressResp.class);
     }
 }

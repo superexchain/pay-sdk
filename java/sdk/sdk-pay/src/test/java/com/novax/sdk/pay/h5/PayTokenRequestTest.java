@@ -31,7 +31,7 @@ class PayTokenRequestTest {
     private static final String ACCESS_SECRET = "oiAKpoyvTJ24NOL38cUtQNutBAqVeF0oH5J-AZf7_cWz3E6-wFgMuVNt7JDtF9r2";
     // server returns ReturnResult<String> — data is the raw token string, not an object
     private static final String SUCCESS_BODY =
-            "{\"code\":0,\"message\":\"ok\",\"data\":\"abc123\"}";
+            "{\"code\":200,\"message\":\"ok\",\"data\":\"abc123\"}";
 
     @Test
     void execute_signsAndIssuesGet_omitsUserId_parsesToken() {
@@ -79,7 +79,7 @@ class PayTokenRequestTest {
             }
         });
 
-        Map<String, String> h = captured.get().headers();
+        var h = captured.get().headers();
         assertFalse(h.containsKey("X-Access-Key"));
         assertFalse(h.containsKey("X-Signature"));
         assertFalse(h.containsKey("X-Timestamp"));

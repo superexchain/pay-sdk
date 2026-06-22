@@ -19,6 +19,10 @@ import java.util.function.LongSupplier;
  *
  * <p>Public paths (e.g. {@code /pay/public/*}) bypass signing — they
  * authenticate via a {@code token} query parameter instead.
+ *
+ * <p>Uses {@code setHeaders} (replace) rather than {@code appendHeaders}: each
+ * signature header is uniquely single-valued, and re-signing should overwrite
+ * any stale value.
  */
 public final class SignatureInterceptor implements Interceptor {
 
@@ -52,11 +56,13 @@ public final class SignatureInterceptor implements Interceptor {
         signed.put("X-Access-Key", credentials.accessKey());
         signed.put("X-Signature", signature);
         signed.put("X-Timestamp", Long.toString(ts));
-        return chain.proceed(req.withHeaders(signed));
+        return chain.proceed(req.setHeaders(signed));
     }
 
-    /** Mirrors the server-side filter URL pattern — only {@code /pay/v3/*}
-     *  and {@code /free-spot/v3/*} are signed; public paths pass through. */
+    /**
+     * Mirrors the server-side filter URL pattern — only {@code /pay/v3/*}
+     * and {@code /free-spot/v3/*} are signed; public paths pass through.
+     */
     private static boolean shouldSign(URI uri) {
         String path = uri.getPath();
         return path != null && (path.startsWith("/api/pay/v3/"));

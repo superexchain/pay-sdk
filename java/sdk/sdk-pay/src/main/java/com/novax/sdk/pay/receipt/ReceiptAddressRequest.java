@@ -10,7 +10,9 @@ import lombok.Getter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** GET /pay/v3/receipt/address — fixed receipt address lookup. */
+/**
+ * GET /pay/v3/receipt/address — fixed receipt address lookup.
+ */
 @Getter
 @Builder
 public class ReceiptAddressRequest extends AbstractApiRequest<PayOrderAddressFixedResp> {
@@ -19,10 +21,18 @@ public class ReceiptAddressRequest extends AbstractApiRequest<PayOrderAddressFix
     private final String smartContractAddress;
     private final String companyUserId;
 
-    @Override public HttpMethod method() { return HttpMethod.GET; }
-    @Override public String path() { return "/pay/v3/receipt/address"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.GET;
+    }
 
-    @Override public Map<String, ?> queryParams() {
+    @Override
+    public String path() {
+        return "/pay/v3/receipt/address";
+    }
+
+    @Override
+    public Map<String, ?> queryParams() {
         Map<String, Object> q = new LinkedHashMap<>();
         if (protocol != null) q.put("protocol", protocol);
         if (smartContractAddress != null) q.put("smartContractAddress", smartContractAddress);
@@ -30,7 +40,8 @@ public class ReceiptAddressRequest extends AbstractApiRequest<PayOrderAddressFix
         return q;
     }
 
-    @Override public TypeRef<PayOrderAddressFixedResp> responseType() {
+    @Override
+    public TypeRef<PayOrderAddressFixedResp> responseType() {
         return TypeRef.of(PayOrderAddressFixedResp.class);
     }
 }

@@ -24,10 +24,18 @@ public class DynamicQrPayCreateRequest extends AbstractApiRequest<String> {
     private final BigDecimal amount;
     private final String comment;
 
-    @Override public HttpMethod method() { return HttpMethod.POST; }
-    @Override public String path() { return "/pay/v3/qr-code-pay/dynamic/create"; }
+    @Override
+    public HttpMethod method() {
+        return HttpMethod.POST;
+    }
 
-    @Override public Object body() {
+    @Override
+    public String path() {
+        return "/pay/v3/qr-code-pay/dynamic/create";
+    }
+
+    @Override
+    public Object body() {
         Map<String, Object> b = new LinkedHashMap<>();
         b.put("receiptOrderId", receiptOrderId);
         b.put("companyUserId", companyUserId);
@@ -37,7 +45,8 @@ public class DynamicQrPayCreateRequest extends AbstractApiRequest<String> {
         return b;
     }
 
-    @Override public TypeRef<String> responseType() {
+    @Override
+    public TypeRef<String> responseType() {
         return TypeRef.of(String.class);
     }
 }

@@ -9,13 +9,11 @@ import com.novax.sdk.core.json.JsonMapper;
 import javax.net.ssl.SSLContext;
 import java.net.URI;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-/** Immutable client configuration built via {@link #builder()}. */
+/**
+ * Immutable client configuration built via {@link #builder()}.
+ */
 public final class NovaxConfig {
 
     private final URI endpoint;
@@ -41,15 +39,37 @@ public final class NovaxConfig {
         this.jsonMapper = b.jsonMapper != null ? b.jsonMapper : JsonMapper.defaultMapper();
     }
 
-    public URI endpoint() { return endpoint; }
-    public Credentials credentials() { return credentials; }
-    public Duration timeout() { return timeout; }
-    public Map<String, String> defaultHeaders() { return defaultHeaders; }
-    public List<Interceptor> interceptors() { return interceptors; }
-    public HttpTransport transport() { return transport; }
-    public JsonMapper jsonMapper() { return jsonMapper; }
+    public URI endpoint() {
+        return endpoint;
+    }
 
-    public static Builder builder() { return new Builder(); }
+    public Credentials credentials() {
+        return credentials;
+    }
+
+    public Duration timeout() {
+        return timeout;
+    }
+
+    public Map<String, String> defaultHeaders() {
+        return defaultHeaders;
+    }
+
+    public List<Interceptor> interceptors() {
+        return interceptors;
+    }
+
+    public HttpTransport transport() {
+        return transport;
+    }
+
+    public JsonMapper jsonMapper() {
+        return jsonMapper;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static final class Builder {
 
@@ -62,21 +82,52 @@ public final class NovaxConfig {
         private JsonMapper jsonMapper;
         private boolean insecureTls;
 
-        public Builder endpoint(URI uri) { this.endpoint = uri; return this; }
-        public Builder credentials(Credentials c) { this.credentials = c; return this; }
-        public Builder timeout(Duration d) { this.timeout = d; return this; }
+        public Builder endpoint(URI uri) {
+            this.endpoint = uri;
+            return this;
+        }
+
+        public Builder credentials(Credentials c) {
+            this.credentials = c;
+            return this;
+        }
+
+        public Builder timeout(Duration d) {
+            this.timeout = d;
+            return this;
+        }
+
         public Builder defaultHeader(String name, String value) {
             this.defaultHeaders.put(name, value);
             return this;
         }
-        public Builder addInterceptor(Interceptor i) { this.interceptors.add(i); return this; }
-        public Builder transport(HttpTransport t) { this.transport = t; return this; }
-        public Builder jsonMapper(JsonMapper m) { this.jsonMapper = m; return this; }
 
-        /** <b>DEV ONLY.</b> Disables TLS certificate validation. Use to hit an
-         *  internal / self-signed dev host. */
-        public Builder insecureTls() { this.insecureTls = true; return this; }
+        public Builder addInterceptor(Interceptor i) {
+            this.interceptors.add(i);
+            return this;
+        }
 
-        public NovaxConfig build() { return new NovaxConfig(this); }
+        public Builder transport(HttpTransport t) {
+            this.transport = t;
+            return this;
+        }
+
+        public Builder jsonMapper(JsonMapper m) {
+            this.jsonMapper = m;
+            return this;
+        }
+
+        /**
+         * <b>DEV ONLY.</b> Disables TLS certificate validation. Use to hit an
+         * internal / self-signed dev host.
+         */
+        public Builder insecureTls() {
+            this.insecureTls = true;
+            return this;
+        }
+
+        public NovaxConfig build() {
+            return new NovaxConfig(this);
+        }
     }
 }

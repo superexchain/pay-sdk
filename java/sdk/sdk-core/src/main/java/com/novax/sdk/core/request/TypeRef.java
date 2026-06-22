@@ -34,6 +34,7 @@ public abstract class TypeRef<T> {
     }
 
     public static <T> TypeRef<T> of(Class<T> raw) {
-        return new TypeRef<>(raw) {};
+        return new TypeRef<>(raw) {
+        };
     }
 }

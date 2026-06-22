@@ -1,10 +1,7 @@
-from __future__ import annotations
-
 import hashlib
 import hmac
 import json
-from typing import Optional
-from urllib.parse import urlparse, parse_qs, unquote
+from urllib.parse import urlparse, unquote
 
 from novax_sdk.request.api_request import HttpMethod
 
@@ -21,7 +18,7 @@ class SignatureCodec:
 
     @staticmethod
     def data_to_sign(method: HttpMethod, url: str,
-                     body: Optional[bytes], timestamp_ms: int) -> str:
+                     body: bytes | None, timestamp_ms: int) -> str:
         parts = [method.value.upper()]
 
         sorted_query = SignatureCodec._sorted_query(url)

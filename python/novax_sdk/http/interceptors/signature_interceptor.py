@@ -1,5 +1,5 @@
 import time
-from typing import Callable, Optional
+from collections.abc import Callable
 
 from novax_sdk.auth.credentials import AccessKeyCredentials
 from novax_sdk.http.interceptor import Chain, Interceptor
@@ -13,7 +13,7 @@ class SignatureInterceptor(Interceptor):
     Uses set_headers (replace) — signatures are single-valued."""
 
     def __init__(self, credentials: AccessKeyCredentials,
-                 clock: Optional[Callable[[], int]] = None) -> None:
+                 clock: Callable[[], int] | None = None) -> None:
         self._credentials = credentials
         self._clock = clock or (lambda: int(time.time() * 1000))
 

@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-from typing import Optional
-
 from novax_sdk.auth.credentials import AccessKeyCredentials
 from novax_sdk.http.interceptor import Interceptor
 from novax_sdk.http.transport import HttpTransport, RequestsTransport
@@ -11,11 +7,11 @@ class NovaxConfig:
     def __init__(
         self,
         endpoint: str,
-        credentials: Optional[AccessKeyCredentials] = None,
+        credentials: AccessKeyCredentials | None = None,
         timeout: float = 30.0,
-        default_headers: Optional[dict[str, str]] = None,
-        interceptors: Optional[list[Interceptor]] = None,
-        transport: Optional[HttpTransport] = None,
+        default_headers: dict[str, str] | None = None,
+        interceptors: list[Interceptor] | None = None,
+        transport: HttpTransport | None = None,
         verify_ssl: bool = True,
     ) -> None:
         if not endpoint:

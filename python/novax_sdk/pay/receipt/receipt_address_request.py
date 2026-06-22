@@ -1,18 +1,17 @@
-from typing import Any, Optional
+from dataclasses import dataclass
+from typing import Any
 
 from novax_sdk.pay.model import PayOrderAddressFixedResp
 from novax_sdk.request.api_request import ApiRequest, HttpMethod
 
 
+@dataclass
 class ReceiptAddressRequest(ApiRequest):
     """GET /pay/v3/receipt/address"""
 
-    def __init__(self, protocol: Optional[str] = None,
-                 smart_contract_address: Optional[str] = None,
-                 company_user_id: Optional[str] = None) -> None:
-        self._protocol = protocol
-        self._smart_contract_address = smart_contract_address
-        self._company_user_id = company_user_id
+    protocol: str | None = None
+    smart_contract_address: str | None = None
+    company_user_id: str | None = None
 
     @property
     def method(self) -> HttpMethod:
@@ -24,9 +23,9 @@ class ReceiptAddressRequest(ApiRequest):
 
     def query_params(self) -> dict[str, Any]:
         return {k: v for k, v in {
-            "protocol": self._protocol,
-            "smartContractAddress": self._smart_contract_address,
-            "companyUserId": self._company_user_id,
+            "protocol": self.protocol,
+            "smartContractAddress": self.smart_contract_address,
+            "companyUserId": self.company_user_id,
         }.items() if v is not None}
 
     @property

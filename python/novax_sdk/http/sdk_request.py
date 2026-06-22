@@ -1,9 +1,7 @@
-from __future__ import annotations
-
 import json
-from dataclasses import dataclass, field
-from typing import Any, Optional
-from urllib.parse import urlencode, quote
+from dataclasses import dataclass
+from typing import Any
+from urllib.parse import urlencode
 
 from novax_sdk.request.api_request import ApiRequest, HttpMethod
 
@@ -17,7 +15,7 @@ class SdkRequest:
     method: HttpMethod
     url: str
     headers: dict[str, list[str]]
-    body: Optional[bytes]
+    body: bytes | None
 
     @staticmethod
     def from_api_request(endpoint: str, req: ApiRequest) -> "SdkRequest":
@@ -37,7 +35,7 @@ class SdkRequest:
             merged.setdefault(k, []).append(v)
         return SdkRequest(self.method, self.url, merged, self.body)
 
-    def set_headers(self, overrides: dict[str, str]) -> "SdkRequest":
+    def set_headers(self, overrides: dict[str, str]) -> "SdkRequest":  # noqa: F821
         merged = {k: list(v) for k, v in self.headers.items()}
         for k, v in overrides.items():
             merged[k] = [v]

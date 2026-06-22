@@ -3,11 +3,12 @@ from __future__ import annotations
 import dataclasses
 import json
 import logging
-from typing import Any, Optional, Type, get_args, get_origin
+import typing
+from decimal import Decimal
+from typing import Any, get_args, get_origin
 
 from novax_sdk.auth.credentials import AccessKeyCredentials
 from novax_sdk.config import NovaxConfig
-from novax_sdk.exceptions import NovaxTransportException
 from novax_sdk.http.interceptor import Interceptor
 from novax_sdk.http.interceptor_chain import InterceptorChain
 from novax_sdk.http.interceptors.header_interceptor import HeaderInterceptor
@@ -21,7 +22,7 @@ _LOG = logging.getLogger(__name__)
 
 class NovaxClient:
     """Sole entry point. Adding an endpoint never requires touching this class —
-    just pass an ApiRequest subclass to execute()."""
+    just pass an ``ApiRequest`` subclass to ``execute()``."""
 
     def __init__(self, config: NovaxConfig) -> None:
         interceptors: list[Interceptor] = list(config.interceptors)
@@ -42,45 +43,47 @@ class NovaxClient:
             data=_deserialize(raw.get("data"), request.response_type),
         )
         if not result.is_success():
-            _LOG.warning("business error: %s %s code=%s message=%s",
-                         sdk_req.method.value, sdk_req.url, result.code, result.msg)
+            _LOG.warning(
+                "business error: %s %s code=%s message=%s",
+                sdk_req.method.value, sdk_req.url, result.code, result.msg,
+            )
         return result
 
     @classmethod
-    def builder(cls) -> "NovaxClientBuilder":
+    def builder(cls) -> NovaxClientBuilder:
         return NovaxClientBuilder()
 
 
 class NovaxClientBuilder:
     def __init__(self) -> None:
-        self._endpoint: str = ""
-        self._credentials: Optional[AccessKeyCredentials] = None
-        self._timeout: float = 30.0
+        self._endpoint = ""
+        self._credentials: AccessKeyCredentials | None = None
+        self._timeout = 30.0
         self._default_headers: dict[str, str] = {}
         self._interceptors: list[Interceptor] = []
-        self._verify_ssl: bool = True
+        self._verify_ssl = True
 
-    def endpoint(self, url: str) -> "NovaxClientBuilder":
+    def endpoint(self, url: str) -> NovaxClientBuilder:
         self._endpoint = url
         return self
 
-    def access_key(self, access_key: str, access_secret: str) -> "NovaxClientBuilder":
+    def access_key(self, access_key: str, access_secret: str) -> NovaxClientBuilder:
         self._credentials = AccessKeyCredentials(access_key, access_secret)
         return self
 
-    def client_ip(self, ip: str) -> "NovaxClientBuilder":
+    def client_ip(self, ip: str) -> NovaxClientBuilder:
         self._default_headers["ip"] = ip
         return self
 
-    def language(self, lang: str) -> "NovaxClientBuilder":
+    def language(self, lang: str) -> NovaxClientBuilder:
         self._default_headers["language"] = lang
         return self
 
-    def add_interceptor(self, interceptor: Interceptor) -> "NovaxClientBuilder":
+    def add_interceptor(self, interceptor: Interceptor) -> NovaxClientBuilder:
         self._interceptors.append(interceptor)
         return self
 
-    def insecure_tls(self) -> "NovaxClientBuilder":
+    def insecure_tls(self) -> NovaxClientBuilder:
         """DEV ONLY — disables TLS certificate validation."""
         self._verify_ssl = False
         return self
@@ -97,20 +100,33 @@ class NovaxClientBuilder:
         return NovaxClient(config)
 
 
+# ── deserialisation ──────────────────────────────────────────────────────────
+
+def _snake_to_camel(name: str) -> str:
+    parts = name.split("_")
+    return parts[0] + "".join(p.title() for p in parts[1:])
+
+
 def _deserialize(data: Any, typ: Any) -> Any:
     if data is None or typ is None:
         return data
+
     origin = get_origin(typ)
+
     if origin is list:
         item_cls = get_args(typ)[0]
         return [_deserialize(item, item_cls) for item in (data or [])]
+
+    if typ is Decimal:
+        return Decimal(str(data))
+
     if dataclasses.is_dataclass(typ) and isinstance(data, dict):
-        hints = {f.name: f.type for f in dataclasses.fields(typ)}
-        import typing
         resolved = typing.get_type_hints(typ)
-        kwargs = {}
+        kwargs: dict[str, Any] = {}
         for f in dataclasses.fields(typ):
-            val = data.get(f.name)
+            camel_key = _snake_to_camel(f.name)
+            val = data.get(camel_key, data.get(f.name))
             kwargs[f.name] = _deserialize(val, resolved.get(f.name))
         return typ(**kwargs)
+
     return data

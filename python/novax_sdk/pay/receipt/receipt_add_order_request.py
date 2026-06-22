@@ -1,26 +1,22 @@
+from dataclasses import dataclass
 from decimal import Decimal
-from typing import Any, Optional
+from typing import Any
 
 from novax_sdk.pay.model import ReceiptOrderAddressResp
 from novax_sdk.request.api_request import ApiRequest, HttpMethod
 
 
+@dataclass
 class ReceiptAddOrderRequest(ApiRequest):
     """POST /pay/v3/receipt/order/add"""
 
-    def __init__(self, protocol: Optional[str] = None, currency: Optional[str] = None,
-                 smart_contract_address: Optional[str] = None,
-                 company_user_id: Optional[str] = None,
-                 receipt_order_id: Optional[str] = None,
-                 currency_number: Optional[Decimal] = None,
-                 call_back_url: Optional[str] = None) -> None:
-        self._protocol = protocol
-        self._currency = currency
-        self._smart_contract_address = smart_contract_address
-        self._company_user_id = company_user_id
-        self._receipt_order_id = receipt_order_id
-        self._currency_number = currency_number
-        self._call_back_url = call_back_url
+    protocol: str | None = None
+    currency: str | None = None
+    smart_contract_address: str | None = None
+    company_user_id: str | None = None
+    receipt_order_id: str | None = None
+    currency_number: Decimal | None = None
+    call_back_url: str | None = None
 
     @property
     def method(self) -> HttpMethod:
@@ -32,13 +28,13 @@ class ReceiptAddOrderRequest(ApiRequest):
 
     def body(self) -> dict[str, Any]:
         return {
-            "protocol": self._protocol,
-            "currency": self._currency,
-            "smartContractAddress": self._smart_contract_address,
-            "companyUserId": self._company_user_id,
-            "receiptOrderId": self._receipt_order_id,
-            "currencyNumber": str(self._currency_number) if self._currency_number else None,
-            "callBackUrl": self._call_back_url,
+            "protocol": self.protocol,
+            "currency": self.currency,
+            "smartContractAddress": self.smart_contract_address,
+            "companyUserId": self.company_user_id,
+            "receiptOrderId": self.receipt_order_id,
+            "currencyNumber": str(self.currency_number) if self.currency_number else None,
+            "callBackUrl": self.call_back_url,
         }
 
     @property

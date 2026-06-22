@@ -2,104 +2,103 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from decimal import Decimal
-from typing import Optional
 
 
 @dataclass
 class PayProtocolsResp:
-    currency: Optional[str] = None
-    protocol: Optional[str] = None
-    currencyType: Optional[int] = None
-    chainName: Optional[str] = None
-    smartContractAddress: Optional[str] = None
+    currency: str | None = None
+    protocol: str | None = None
+    currency_type: int | None = None
+    chain_name: str | None = None
+    smart_contract_address: str | None = None
 
 
 @dataclass
 class PayOrderResp:
-    shortName: Optional[str] = None
-    logo: Optional[str] = None
-    currency: Optional[str] = None
-    currencyNumber: Optional[Decimal] = None
-    payCurrencyNumber: Optional[Decimal] = None
+    short_name: str | None = None
+    logo: str | None = None
+    currency: str | None = None
+    currency_number: Decimal | None = None
+    pay_currency_number: Decimal | None = None
 
 
 @dataclass
 class PayOrderAddressResp:
-    protocol: Optional[str] = None
-    currency: Optional[str] = None
-    receiptAddress: Optional[str] = None
-    endTime: Optional[int] = None
-    status: Optional[int] = None
+    protocol: str | None = None
+    currency: str | None = None
+    receipt_address: str | None = None
+    end_time: int | None = None
+    status: int | None = None
 
 
 @dataclass
 class PayOrderAddressFixedResp:
-    protocol: Optional[str] = None
-    receiptAddress: Optional[str] = None
+    protocol: str | None = None
+    receipt_address: str | None = None
 
 
 @dataclass
 class ReceiptHashOrderResp:
-    id: Optional[int] = None
-    userId: Optional[int] = None
-    userCurrencyOrderId: Optional[int] = None
-    companyOrderId: Optional[str] = None
-    protocol: Optional[str] = None
-    currency: Optional[str] = None
-    fromAddress: Optional[str] = None
-    toAddress: Optional[str] = None
-    txId: Optional[str] = None
-    amount: Optional[Decimal] = None
-    status: Optional[int] = None
-    successTime: Optional[int] = None
-    createTime: Optional[int] = None
-    type: Optional[int] = None
-    fee: Optional[Decimal] = None
+    id: int | None = None
+    user_id: int | None = None
+    user_currency_order_id: int | None = None
+    company_order_id: str | None = None
+    protocol: str | None = None
+    currency: str | None = None
+    from_address: str | None = None
+    to_address: str | None = None
+    tx_id: str | None = None
+    amount: Decimal | None = None
+    status: int | None = None
+    success_time: int | None = None
+    create_time: int | None = None
+    type: int | None = None
+    fee: Decimal | None = None
 
 
 @dataclass
 class ReceiptOrderResp:
-    receiptOrderId: Optional[str] = None
-    currency: Optional[str] = None
-    protocol: Optional[str] = None
-    smartContractAddress: Optional[str] = None
-    currencyNumber: Optional[Decimal] = None
-    acceptCurrencyNumber: Optional[Decimal] = None
-    counts: Optional[int] = None
-    okTime: Optional[int] = None
-    orderStatus: Optional[int] = None
-    status: Optional[int] = None
-    endTime: Optional[int] = None
-    loseTime: Optional[int] = None
-    hashOrders: list[ReceiptHashOrderResp] = field(default_factory=list)
+    receipt_order_id: str | None = None
+    currency: str | None = None
+    protocol: str | None = None
+    smart_contract_address: str | None = None
+    currency_number: Decimal | None = None
+    accept_currency_number: Decimal | None = None
+    counts: int | None = None
+    ok_time: int | None = None
+    order_status: int | None = None
+    status: int | None = None
+    end_time: int | None = None
+    lose_time: int | None = None
+    hash_orders: list[ReceiptHashOrderResp] = field(default_factory=list)
 
 
 @dataclass
 class ReceiptOrderAddressResp:
-    receiptOrderId: Optional[str] = None
-    currency: Optional[str] = None
-    protocol: Optional[str] = None
-    smartContractAddress: Optional[str] = None
-    currencyNumber: Optional[Decimal] = None
-    acceptCurrencyNumber: Optional[Decimal] = None
-    counts: Optional[int] = None
-    okTime: Optional[int] = None
-    orderStatus: Optional[int] = None
-    status: Optional[int] = None
-    endTime: Optional[int] = None
-    loseTime: Optional[int] = None
-    hashOrders: list[ReceiptHashOrderResp] = field(default_factory=list)
-    address: Optional[str] = None
+    receipt_order_id: str | None = None
+    currency: str | None = None
+    protocol: str | None = None
+    smart_contract_address: str | None = None
+    currency_number: Decimal | None = None
+    accept_currency_number: Decimal | None = None
+    counts: int | None = None
+    ok_time: int | None = None
+    order_status: int | None = None
+    status: int | None = None
+    end_time: int | None = None
+    lose_time: int | None = None
+    hash_orders: list[ReceiptHashOrderResp] = field(default_factory=list)
+    address: str | None = None
 
 
 @dataclass
 class WithdrawOrderResp:
-    withdrawOrderId: Optional[str] = None
-    type: Optional[int] = None
-    currency: Optional[str] = None
-    protocol: Optional[str] = None
-    smartContractAddress: Optional[str] = None
-    address: Optional[str] = None
-    currencyNumber: Optional[Decimal] = None
-    status: Optional[int] = None
-    hashOrders: list[ReceiptHashOrderResp] = field(default_factory=list)
+    withdraw_order_id: str | None = None
+    type: int | None = None
+    currency: str | None = None
+    protocol: str | None = None
+    smart_contract_address: str | None = None
+    address: str | None = None
+    currency_number: Decimal | None = None
+    status: int | None = None
+    hash_orders: list[ReceiptHashOrderResp] = field(default_factory=list)

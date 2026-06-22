@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.platform.commons.util.StringUtils;
-
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +47,7 @@ class PayTokenRequestTest {
             );
             System.out.println(resp.data().token());
             assertFalse(expectException);
-            assertTrue(StringUtils.isNotBlank(resp.data().token()));
+            assertTrue(resp.data().token() != null && !resp.data().token().isBlank());
         } catch (Exception e) {
             assertTrue(expectException);
             assertInstanceOf(NovaxException.class, e);

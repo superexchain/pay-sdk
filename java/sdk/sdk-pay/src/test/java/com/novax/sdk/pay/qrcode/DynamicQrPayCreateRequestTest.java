@@ -7,8 +7,6 @@ import com.novax.sdk.core.http.interceptors.LoggingInterceptor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.platform.commons.util.StringUtils;
-
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -41,6 +39,6 @@ class DynamicQrPayCreateRequestTest {
                         .build()
         );
         System.out.println(resp);
-        assertTrue(StringUtils.isNotBlank(resp.msg()));
+        assertTrue(resp.msg() != null && !resp.msg().isBlank());
     }
 }

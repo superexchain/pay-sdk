@@ -27,7 +27,8 @@ public sealed class NovaxClient
     {
         PropertyNamingPolicy       = JsonNamingPolicy.CamelCase,
         PropertyNameCaseInsensitive = true,
-        DefaultIgnoreCondition     = JsonIgnoreCondition.WhenWritingNull
+        DefaultIgnoreCondition     = JsonIgnoreCondition.WhenWritingNull,
+        NumberHandling             = JsonNumberHandling.AllowReadingFromString
     };
 
     private readonly string _endpoint;

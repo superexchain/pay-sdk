@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -108,8 +109,12 @@ func renderValue(v any) string {
 		}
 		return "false"
 	case float64:
-		s := fmt.Sprintf("%g", val)
-		return s
+		// Use integer representation when the value has no fractional part,
+		// matching the server-side getSortedBodyString behaviour.
+		if val == float64(int64(val)) {
+			return fmt.Sprintf("%d", int64(val))
+		}
+		return strconv.FormatFloat(val, 'f', -1, 64)
 	case map[string]any, []any:
 		b, _ := json.Marshal(val)
 		return string(b)

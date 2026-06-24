@@ -90,9 +90,17 @@ func execute[T any](ctx context.Context, c *Client, req Request) (*ReturnResult[
 		return nil, &JSONError{Cause: err}
 	}
 	if !result.IsSuccess() {
+		var code any
+		if result.Code != nil {
+			code = *result.Code
+		}
+		var msg any
+		if result.Msg != nil {
+			msg = *result.Msg
+		}
 		slog.Warn("business error",
 			"method", req.Method(), "path", req.Path(),
-			"code", result.Code, "msg", result.Msg,
+			"code", code, "msg", msg,
 		)
 	}
 	return &result, nil

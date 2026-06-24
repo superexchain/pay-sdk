@@ -2,6 +2,7 @@ package novax_test
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sync"
 	"testing"
@@ -63,7 +64,8 @@ func TestIntegration_H5Order(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_H5Protocols(t *testing.T) {
@@ -71,7 +73,8 @@ func TestIntegration_H5Protocols(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_ReceiptProtocols(t *testing.T) {
@@ -79,7 +82,8 @@ func TestIntegration_ReceiptProtocols(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_ReceiptOrders(t *testing.T) {
@@ -87,7 +91,8 @@ func TestIntegration_ReceiptOrders(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_ReceiptAddOrder(t *testing.T) {
@@ -103,7 +108,8 @@ func TestIntegration_ReceiptAddOrder(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_WithdrawOrders(t *testing.T) {
@@ -113,7 +119,8 @@ func TestIntegration_WithdrawOrders(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }
 
 func TestIntegration_DynamicQrPayCreate(t *testing.T) {
@@ -130,5 +137,112 @@ func TestIntegration_DynamicQrPayCreate(t *testing.T) {
 	if resp.Msg == nil || *resp.Msg == "" {
 		t.Error("expected non-empty Msg (server returns order id in Msg)")
 	}
-	t.Logf("%+v", resp)
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_H5Address(t *testing.T) {
+	resp, err := devClient().Pay.H5Address(context.Background(), &novax.H5AddressRequest{
+		Protocol:             "TRC20",
+		Currency:             "USDT",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+		Token:                "20689544410874593281782112152726",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_H5OkTime(t *testing.T) {
+	resp, err := devClient().Pay.H5OkTime(context.Background(), &novax.H5OkTimeRequest{
+		Protocol:             "TRC20",
+		Currency:             "USDT",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+		Token:                "20689544410874593281782112152726",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_H5Confirm(t *testing.T) {
+	resp, err := devClient().Pay.H5Confirm(context.Background(), &novax.H5ConfirmRequest{
+		Protocol:             "TRC20",
+		Currency:             "USDT",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+		Token:                "20689544410874593281782112152726",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_H5OrderStatus(t *testing.T) {
+	resp, err := devClient().Pay.H5OrderStatus(context.Background(), &novax.H5OrderStatusRequest{
+		Protocol:             "TRC20",
+		Currency:             "USDT",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+		Token:                "20689544410874593281782112152726",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_ReceiptAddress(t *testing.T) {
+	resp, err := devClient().Pay.ReceiptAddress(context.Background(), &novax.ReceiptAddressRequest{
+		Protocol:             "TRC20",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_ReceiptConfirm(t *testing.T) {
+	resp, err := devClient().Pay.ReceiptConfirm(context.Background(), &novax.ReceiptConfirmRequest{
+		Protocol:             "TRC20",
+		Currency:             "usdt",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		CompanyUserID:        "88888896",
+		ReceiptOrderID:       "1234",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
+}
+
+func TestIntegration_WithdrawAddOrder(t *testing.T) {
+	resp, err := devClient().Pay.WithdrawAddOrder(context.Background(), &novax.WithdrawAddOrderRequest{
+		WithdrawOrderID:      tsStr(),
+		OrderType:            1,
+		Currency:             "USDT",
+		Protocol:             "TRC20",
+		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+		Address:              "TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc",
+		CurrencyNumber:       decimal.NewFromInt(1),
+		CallBackURL:          "https://example.com/callback",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := json.Marshal(resp)
+	t.Logf("%s", b)
 }

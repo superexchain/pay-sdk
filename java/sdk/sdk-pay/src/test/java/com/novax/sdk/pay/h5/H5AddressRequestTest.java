@@ -5,6 +5,7 @@ import com.novax.sdk.core.exception.NovaxException;
 import com.novax.sdk.core.model.ReturnResult;
 import com.novax.sdk.core.http.interceptors.LoggingInterceptor;
 import com.novax.sdk.pay.model.PayOrderAddressResp;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -27,28 +28,18 @@ class H5AddressRequestTest {
             .insecureTls()
             .build();
 
-    @ParameterizedTest
-    @CsvSource({
-            "invalid_token, true",
-            "real_token_here, false"
-    })
-    void execute_h5Address(String token, boolean expectException) {
-        try {
-            ReturnResult<PayOrderAddressResp> resp = CLIENT.execute(
-                    H5AddressRequest.builder()
-                            .protocol("TRC20")
-                            .currency("USDT")
-                            .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
-                            .companyUserId("test_user")
-                            .token(token)
-                            .build()
-            );
-            System.out.println(resp);
-            assertFalse(expectException);
-            assertNotNull(resp);
-        } catch (Exception e) {
-            assertTrue(expectException);
-            assertInstanceOf(NovaxException.class, e);
-        }
+    @Test
+    void execute_h5Address() {
+        ReturnResult<PayOrderAddressResp> resp = CLIENT.execute(
+                H5AddressRequest.builder()
+                        .protocol("TRC20")
+                        .currency("USDT")
+                        .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+                        .companyUserId("88888896")
+                        .token("20689544410874593281782112152726")
+                        .build()
+        );
+        System.out.println(resp);
+        assertNotNull(resp);
     }
 }

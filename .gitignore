@@ -31,3 +31,8 @@ rust/target/
 
 # Go
 golang/vendor/
+
+# C#
+csharp/**/bin/
+csharp/**/obj/
+csharp/**/*.user

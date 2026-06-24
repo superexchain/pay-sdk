@@ -26,7 +26,7 @@ public class ClientTests
         Action<NovaxClient.NovaxClientBuilder>? configure = null)
     {
         var builder = NovaxClient.Builder()
-            .WithEndpoint("https://api.example.com")
+            .WithEndpoint("https://api.example.com/api")
             .WithTransport(stub);
         configure?.Invoke(builder);
         return builder.Build();

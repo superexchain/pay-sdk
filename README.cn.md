@@ -1,12 +1,12 @@
 # Novax SDK
 
-Multi-language SDK for the Novax Pay API. Supports Java, Python, Go, Rust, and C#.
+Novax Pay API 的多语言 SDK，支持 Java、Python、Go、Rust 和 C#。
 
-All SDKs share the same design: a single client entry point, request objects per endpoint, and a unified `ReturnResult<T>` response envelope.
+所有 SDK 遵循相同的设计：单一客户端入口、每个接口对应一个请求对象、统一的 `ReturnResult<T>` 响应封装。
 
-## Languages
+## 语言支持
 
-| Language | Min Version | Package |
+| 语言 | 最低版本 | 包名 |
 |---|---|---|
 | [Java](#java) | Java 17 | Maven (`com.novax:sdk-pay`) |
 | [Python](#python) | Python 3.11 | pip (`novax-sdk`) |
@@ -16,23 +16,23 @@ All SDKs share the same design: a single client entry point, request objects per
 
 ---
 
-## Response Envelope
+## 响应结构
 
-Every API call returns `ReturnResult<T>`:
+所有接口返回 `ReturnResult<T>`：
 
-| Field | Type | Description |
+| 字段 | 类型 | 说明 |
 |---|---|---|
-| `code` | int | `200` = success |
-| `msg` | string | Human-readable message |
-| `data` | T | Typed payload (null on error) |
+| `code` | int | `200` 表示成功 |
+| `msg` | string | 可读的提示信息 |
+| `data` | T | 类型化数据（失败时为 null） |
 
 ---
 
 ## Java
 
-**Requirements:** Java 17, Maven
+**环境要求：** Java 17、Maven
 
-### Dependencies (`pom.xml`)
+### 添加依赖（`pom.xml`）
 
 ```xml
 <dependency>
@@ -42,7 +42,7 @@ Every API call returns `ReturnResult<T>`:
 </dependency>
 ```
 
-### Initialize client
+### 初始化客户端
 
 ```java
 import com.novax.sdk.core.NovaxClient;
@@ -50,12 +50,12 @@ import com.novax.sdk.core.NovaxClient;
 NovaxClient client = NovaxClient.builder()
     .endpoint("https://api.novax.dev/api")
     .accessKey("YOUR_ACCESS_KEY", "YOUR_ACCESS_SECRET")
-    .clientIp("1.2.3.4")      // optional: IP whitelist header
-    .language("zh-CN")         // optional: language header
+    .clientIp("1.2.3.4")   // 可选：IP 白名单请求头
+    .language("zh-CN")      // 可选：语言请求头
     .build();
 ```
 
-### H5 Payment — get token
+### H5 支付 — 获取 Token
 
 ```java
 import com.novax.sdk.pay.h5.PayTokenRequest;
@@ -71,7 +71,7 @@ if (result.isSuccess()) {
 }
 ```
 
-### Receipt — create order
+### 收款 — 创建订单
 
 ```java
 import com.novax.sdk.pay.receipt.ReceiptAddOrderRequest;
@@ -90,7 +90,7 @@ ReturnResult<ReceiptOrderAddressResp> result = client.execute(
 );
 ```
 
-### Withdraw — create order
+### 提现 — 创建订单
 
 ```java
 import com.novax.sdk.pay.withdraw.WithdrawAddOrderRequest;
@@ -108,30 +108,30 @@ ReturnResult<WithdrawOrderResp> result = client.execute(
 );
 ```
 
-### Build & test
+### 构建与测试
 
 ```bash
 cd java/sdk
-mvn clean install        # build all modules
-mvn test                 # run all tests
-mvn -pl sdk-pay test     # run sdk-pay tests only
+mvn clean install        # 构建所有模块
+mvn test                 # 运行所有测试
+mvn -pl sdk-pay test     # 仅运行 sdk-pay 测试
 ```
 
 ---
 
 ## Python
 
-**Requirements:** Python 3.11+
+**环境要求：** Python 3.11+
 
-### Install
+### 安装
 
 ```bash
 pip install novax-sdk
-# or from source:
+# 或从源码安装：
 pip install -e python/
 ```
 
-### Initialize client
+### 初始化客户端
 
 ```python
 from novax_sdk import NovaxClient
@@ -140,13 +140,13 @@ client = (
     NovaxClient.builder()
     .endpoint("https://api.novax.dev/api")
     .access_key("YOUR_ACCESS_KEY", "YOUR_ACCESS_SECRET")
-    .client_ip("1.2.3.4")   # optional
-    .language("zh-CN")       # optional
+    .client_ip("1.2.3.4")   # 可选
+    .language("zh-CN")       # 可选
     .build()
 )
 ```
 
-### H5 Payment — get token
+### H5 支付 — 获取 Token
 
 ```python
 from decimal import Decimal
@@ -160,7 +160,7 @@ if result.is_success():
     token = result.data   # str
 ```
 
-### Receipt — create order
+### 收款 — 创建订单
 
 ```python
 from decimal import Decimal
@@ -179,7 +179,7 @@ result = client.execute(
 )
 ```
 
-### Withdraw — create order
+### 提现 — 创建订单
 
 ```python
 from decimal import Decimal
@@ -197,7 +197,7 @@ result = client.execute(
 )
 ```
 
-### Run tests
+### 运行测试
 
 ```bash
 cd python
@@ -209,15 +209,15 @@ pytest
 
 ## Go
 
-**Requirements:** Go 1.21+
+**环境要求：** Go 1.21+
 
-### Install
+### 安装
 
 ```bash
 go get novax.dev/sdk
 ```
 
-### Initialize client
+### 初始化客户端
 
 ```go
 import novax "novax.dev/sdk"
@@ -225,15 +225,15 @@ import novax "novax.dev/sdk"
 client, err := novax.NewClient(
     novax.WithEndpoint("https://api.novax.dev/api"),
     novax.WithAccessKey("YOUR_ACCESS_KEY", "YOUR_ACCESS_SECRET"),
-    novax.WithClientIP("1.2.3.4"),  // optional
-    novax.WithLanguage("zh-CN"),    // optional
+    novax.WithClientIP("1.2.3.4"),  // 可选
+    novax.WithLanguage("zh-CN"),    // 可选
 )
 if err != nil {
     log.Fatal(err)
 }
 ```
 
-### H5 Payment — get token
+### H5 支付 — 获取 Token
 
 ```go
 import (
@@ -254,7 +254,7 @@ if result.IsSuccess() {
 }
 ```
 
-### Receipt — create order
+### 收款 — 创建订单
 
 ```go
 result, err := client.Pay.ReceiptAddOrder(ctx, &novax.ReceiptAddOrderRequest{
@@ -268,7 +268,7 @@ result, err := client.Pay.ReceiptAddOrder(ctx, &novax.ReceiptAddOrderRequest{
 })
 ```
 
-### Withdraw — create order
+### 提现 — 创建订单
 
 ```go
 result, err := client.Pay.WithdrawAddOrder(ctx, &novax.WithdrawAddOrderRequest{
@@ -281,9 +281,9 @@ result, err := client.Pay.WithdrawAddOrder(ctx, &novax.WithdrawAddOrderRequest{
 })
 ```
 
-### Available Pay methods
+### Pay 接口列表
 
-| Method | HTTP | Path |
+| 方法 | HTTP 方法 | 路径 |
 |---|---|---|
 | `Pay.Token` | GET | `/pay/v3/token` |
 | `Pay.H5Order` | GET | `/pay/public/h5/order` |
@@ -301,7 +301,7 @@ result, err := client.Pay.WithdrawAddOrder(ctx, &novax.WithdrawAddOrderRequest{
 | `Pay.WithdrawOrders` | GET | `/pay/v3/withdraw/orders` |
 | `Pay.WithdrawAddOrder` | POST | `/pay/v3/withdraw/order/add` |
 
-### Run tests
+### 运行测试
 
 ```bash
 cd golang
@@ -312,16 +312,16 @@ go test ./...
 
 ## Rust
 
-**Requirements:** Rust 2021 edition
+**环境要求：** Rust 2021 edition
 
-### Add to `Cargo.toml`
+### 添加依赖（`Cargo.toml`）
 
 ```toml
 [dependencies]
-novax-sdk = { path = "../rust" }  # or version once published
+novax-sdk = { path = "../rust" }  # 发布后改为 version
 ```
 
-### Initialize client
+### 初始化客户端
 
 ```rust
 use novax_sdk::NovaxClient;
@@ -329,12 +329,12 @@ use novax_sdk::NovaxClient;
 let client = NovaxClient::builder()
     .endpoint("https://api.novax.dev/api")
     .access_key("YOUR_ACCESS_KEY", "YOUR_ACCESS_SECRET")
-    .client_ip("1.2.3.4")   // optional
-    .language("zh-CN")       // optional
+    .client_ip("1.2.3.4")   // 可选
+    .language("zh-CN")       // 可选
     .build()?;
 ```
 
-### H5 Payment — get token
+### H5 支付 — 获取 Token
 
 ```rust
 use rust_decimal::Decimal;
@@ -350,7 +350,7 @@ if result.is_success() {
 }
 ```
 
-### Receipt — create order
+### 收款 — 创建订单
 
 ```rust
 use novax_sdk::pay::receipt::ReceiptAddOrderRequest;
@@ -366,7 +366,7 @@ let result = client.execute(&ReceiptAddOrderRequest {
 })?;
 ```
 
-### Withdraw — create order
+### 提现 — 创建订单
 
 ```rust
 use novax_sdk::pay::withdraw::WithdrawAddOrderRequest;
@@ -382,7 +382,7 @@ let result = client.execute(&WithdrawAddOrderRequest {
 })?;
 ```
 
-### Run tests
+### 运行测试
 
 ```bash
 cd rust
@@ -393,15 +393,15 @@ cargo test
 
 ## C#
 
-**Requirements:** .NET 8+
+**环境要求：** .NET 8+
 
-### Add reference
+### 添加引用
 
 ```xml
 <ProjectReference Include="../NovaxSdk/NovaxSdk.csproj" />
 ```
 
-### Initialize client
+### 初始化客户端
 
 ```csharp
 using NovaxSdk;
@@ -409,12 +409,12 @@ using NovaxSdk;
 var client = NovaxClient.Builder()
     .WithEndpoint("https://api.novax.dev/api")
     .WithAccessKey("YOUR_ACCESS_KEY", "YOUR_ACCESS_SECRET")
-    .WithClientIp("1.2.3.4")   // optional
-    .WithLanguage("zh-CN")      // optional
+    .WithClientIp("1.2.3.4")   // 可选
+    .WithLanguage("zh-CN")      // 可选
     .Build();
 ```
 
-### H5 Payment — get token
+### H5 支付 — 获取 Token
 
 ```csharp
 using NovaxSdk.Pay;
@@ -429,7 +429,7 @@ if (result.IsSuccess)
 }
 ```
 
-### Receipt — create order
+### 收款 — 创建订单
 
 ```csharp
 var result = await client.Pay.ReceiptAddOrderAsync(
@@ -446,7 +446,7 @@ var result = await client.Pay.ReceiptAddOrderAsync(
 );
 ```
 
-### Withdraw — create order
+### 提现 — 创建订单
 
 ```csharp
 var result = await client.Pay.WithdrawAddOrderAsync(
@@ -462,7 +462,7 @@ var result = await client.Pay.WithdrawAddOrderAsync(
 );
 ```
 
-### Run tests
+### 运行测试
 
 ```bash
 cd csharp
@@ -471,14 +471,22 @@ dotnet test
 
 ---
 
-## Authentication
+## 认证鉴权
 
-All signed endpoints (`/api/pay/v3/*`) require `accessKey` + `accessSecret`. The SDK computes the HMAC-SHA256 signature automatically and adds `X-Access-Key`, `X-Signature`, and `X-Timestamp` headers to every signed request.
+所有签名接口（`/api/pay/v3/*`）需要提供 `accessKey` 和 `accessSecret`。SDK 会自动计算 HMAC-SHA256 签名，并在每次请求时自动添加 `X-Access-Key`、`X-Signature`、`X-Timestamp` 请求头。
 
-Public endpoints (`/pay/public/*`) do not require credentials.
+公开接口（`/pay/public/*`）不需要凭据。
 
-`userId` is resolved server-side from the access key — never pass it from the SDK.
+`userId` 由服务端根据 `X-Access-Key` 解析注入，SDK 端不需要也不应传递此字段。
 
-## Dev / Self-signed TLS
+## 开发环境 / 自签名证书
 
-To hit a dev server with a self-signed certificate, add `.insecureTls()` (Java/Python/Rust) or `.WithInsecureTls()` (C#) or `novax.WithInsecureTLS()` (Go) to the builder. **Never use in production.**
+访问使用自签名证书的开发服务器时，在构建器中添加：
+
+| 语言 | 方法 |
+|---|---|
+| Java / Python / Rust | `.insecureTls()` |
+| C# | `.WithInsecureTls()` |
+| Go | `novax.WithInsecureTLS()` |
+
+**生产环境严禁使用此选项。**

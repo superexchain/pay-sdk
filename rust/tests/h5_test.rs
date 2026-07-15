@@ -45,7 +45,7 @@ fn test_h5_address() {
     let resp = client()
         .execute(&H5AddressRequest {
             protocol:               Some("TRC20".into()),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             company_user_id:        Some("88888896".into()),
             token:                  Some(token()),
@@ -60,7 +60,7 @@ fn test_h5_ok_time() {
     let resp = client()
         .execute(&H5OkTimeRequest {
             protocol:               Some("TRC20".into()),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             company_user_id:        Some("88888896".into()),
             token:                  Some(token()),
@@ -75,7 +75,7 @@ fn test_h5_confirm() {
     let resp = client()
         .execute(&H5ConfirmRequest {
             protocol:               Some("TRC20".into()),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             company_user_id:        Some("88888896".into()),
             token:                  Some(token()),
@@ -90,7 +90,7 @@ fn test_h5_order_status() {
     let resp = client()
         .execute(&H5OrderStatusRequest {
             protocol:               Some("TRC20".into()),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             company_user_id:        Some("88888896".into()),
             token:                  Some(token()),

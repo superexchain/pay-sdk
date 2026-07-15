@@ -63,7 +63,7 @@ def test_receipt_add_order():
     resp = CLIENT.execute(
         ReceiptAddOrderRequest(
             protocol="TRC20",
-            currency="USDT",
+            currency="usdt",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             company_user_id="88888896",
             receipt_order_id=str(int(time.time() * 1000)),

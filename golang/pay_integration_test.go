@@ -98,7 +98,7 @@ func TestIntegration_ReceiptOrders(t *testing.T) {
 func TestIntegration_ReceiptAddOrder(t *testing.T) {
 	resp, err := devClient().Pay.ReceiptAddOrder(context.Background(), &novax.ReceiptAddOrderRequest{
 		Protocol:             "TRC20",
-		Currency:             "USDT",
+		Currency:             "usdt",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		CompanyUserID:        "88888896",
 		ReceiptOrderID:       tsStr(),
@@ -144,7 +144,7 @@ func TestIntegration_DynamicQrPayCreate(t *testing.T) {
 func TestIntegration_H5Address(t *testing.T) {
 	resp, err := devClient().Pay.H5Address(context.Background(), &novax.H5AddressRequest{
 		Protocol:             "TRC20",
-		Currency:             "USDT",
+		Currency:             "usdt",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		CompanyUserID:        "88888896",
 		Token:                "20689544410874593281782112152726",
@@ -159,7 +159,7 @@ func TestIntegration_H5Address(t *testing.T) {
 func TestIntegration_H5OkTime(t *testing.T) {
 	resp, err := devClient().Pay.H5OkTime(context.Background(), &novax.H5OkTimeRequest{
 		Protocol:             "TRC20",
-		Currency:             "USDT",
+		Currency:             "usdt",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		CompanyUserID:        "88888896",
 		Token:                "20689544410874593281782112152726",
@@ -174,7 +174,7 @@ func TestIntegration_H5OkTime(t *testing.T) {
 func TestIntegration_H5Confirm(t *testing.T) {
 	resp, err := devClient().Pay.H5Confirm(context.Background(), &novax.H5ConfirmRequest{
 		Protocol:             "TRC20",
-		Currency:             "USDT",
+		Currency:             "usdt",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		CompanyUserID:        "88888896",
 		Token:                "20689544410874593281782112152726",
@@ -189,7 +189,7 @@ func TestIntegration_H5Confirm(t *testing.T) {
 func TestIntegration_H5OrderStatus(t *testing.T) {
 	resp, err := devClient().Pay.H5OrderStatus(context.Background(), &novax.H5OrderStatusRequest{
 		Protocol:             "TRC20",
-		Currency:             "USDT",
+		Currency:             "usdt",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		CompanyUserID:        "88888896",
 		Token:                "20689544410874593281782112152726",
@@ -233,7 +233,7 @@ func TestIntegration_WithdrawAddOrder(t *testing.T) {
 	resp, err := devClient().Pay.WithdrawAddOrder(context.Background(), &novax.WithdrawAddOrderRequest{
 		WithdrawOrderID:      tsStr(),
 		OrderType:            1,
-		Currency:             "USDT",
+		Currency:             "usdt",
 		Protocol:             "TRC20",
 		SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
 		Address:              "TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc",

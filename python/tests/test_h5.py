@@ -58,7 +58,7 @@ def test_h5_address():
     resp = CLIENT.execute(
         H5AddressRequest(
             protocol="TRC20",
-            currency="USDT",
+            currency="usdt",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             company_user_id="88888896",
             token=token,
@@ -73,7 +73,7 @@ def test_h5_ok_time():
     resp = CLIENT.execute(
         H5OkTimeRequest(
             protocol="TRC20",
-            currency="USDT",
+            currency="usdt",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             company_user_id="88888896",
             token=token,
@@ -88,7 +88,7 @@ def test_h5_confirm():
     resp = CLIENT.execute(
         H5ConfirmRequest(
             protocol="TRC20",
-            currency="USDT",
+            currency="usdt",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             company_user_id="88888896",
             token=token,
@@ -103,7 +103,7 @@ def test_h5_order_status():
     resp = CLIENT.execute(
         H5OrderStatusRequest(
             protocol="TRC20",
-            currency="USDT",
+            currency="usdt",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             company_user_id="88888896",
             token=token,

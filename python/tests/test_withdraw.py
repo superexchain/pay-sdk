@@ -33,7 +33,7 @@ def test_withdraw_add_order():
         WithdrawAddOrderRequest(
             withdraw_order_id=str(int(time.time() * 1000)),
             order_type=1,
-            currency="USDT",
+            currency="usdt",
             protocol="TRC20",
             smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             address="TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc",

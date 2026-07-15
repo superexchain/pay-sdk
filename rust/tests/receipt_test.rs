@@ -53,7 +53,7 @@ fn test_receipt_add_order() {
     let resp = client()
         .execute(&ReceiptAddOrderRequest {
             protocol:               Some("TRC20".into()),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             company_user_id:        Some("88888896".into()),
             receipt_order_id:       Some(ts.to_string()),

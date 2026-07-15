@@ -67,7 +67,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task H5Address()
     {
         var resp = await Client.Pay.H5AddressAsync(new H5AddressRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             CompanyUserId: "88888896", Token: await GetTokenAsync()));
         Log(resp);
@@ -77,7 +77,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task H5OkTime()
     {
         var resp = await Client.Pay.H5OkTimeAsync(new H5OkTimeRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             CompanyUserId: "88888896", Token: await GetTokenAsync()));
         Log(resp);
@@ -87,7 +87,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task H5Confirm()
     {
         var resp = await Client.Pay.H5ConfirmAsync(new H5ConfirmRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             CompanyUserId: "88888896", Token: await GetTokenAsync()));
         Log(resp);
@@ -97,7 +97,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task H5OrderStatus()
     {
         var resp = await Client.Pay.H5OrderStatusAsync(new H5OrderStatusRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             CompanyUserId: "88888896", Token: await GetTokenAsync()));
         Log(resp);
@@ -151,7 +151,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task ReceiptAddOrder()
     {
         var resp = await Client.Pay.ReceiptAddOrderAsync(new ReceiptAddOrderRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             CompanyUserId: "88888896", ReceiptOrderId: Ts(), CurrencyNumber: 1m,
             CallBackUrl: "http://tripartite-payment-ts.dev.svc.cluster.local/v3/public/test/call/back"));
@@ -182,7 +182,7 @@ public class PayIntegrationTests(ITestOutputHelper output)
     [Fact] public async Task WithdrawAddOrder()
     {
         var resp = await Client.Pay.WithdrawAddOrderAsync(new WithdrawAddOrderRequest(
-            WithdrawOrderId: Ts(), OrderType: 1, Currency: "USDT", Protocol: "TRC20",
+            WithdrawOrderId: Ts(), OrderType: 1, Currency: "usdt", Protocol: "TRC20",
             SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
             Address: "TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc",
             CurrencyNumber: 1m, CallBackUrl: "https://example.com/callback"));

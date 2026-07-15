@@ -23,7 +23,7 @@ fn test_withdraw_add_order() {
         .execute(&WithdrawAddOrderRequest {
             withdraw_order_id:      Some(ts.to_string()),
             order_type:             Some(1),
-            currency:               Some("USDT".into()),
+            currency:               Some("usdt".into()),
             protocol:               Some("TRC20".into()),
             smart_contract_address: Some("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into()),
             address:                Some("TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc".into()),

@@ -108,7 +108,7 @@ func TestPayToken_GET_URLAndQuery(t *testing.T) {
 func TestReceiptAddOrder_POST_ContentType(t *testing.T) {
 	s := stub(`{"code":200,"data":null}`)
 	newClient(t, s).Pay.ReceiptAddOrder(context.Background(), &novax.ReceiptAddOrderRequest{ //nolint:errcheck
-		Protocol: "TRC20", Currency: "USDT",
+		Protocol: "TRC20", Currency: "usdt",
 		SmartContractAddress: "Taddr", CompanyUserID: "88888896",
 		ReceiptOrderID: "r-1", CurrencyNumber: decimal.NewFromInt(1),
 	})

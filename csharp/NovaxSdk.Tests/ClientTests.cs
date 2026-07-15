@@ -81,7 +81,7 @@ public class ClientTests
         var client = BuildClient(stub);
 
         await client.Pay.ReceiptAddOrderAsync(new ReceiptAddOrderRequest(
-            Protocol: "TRC20", Currency: "USDT",
+            Protocol: "TRC20", Currency: "usdt",
             SmartContractAddress: "Taddr", CompanyUserId: "888",
             ReceiptOrderId: "r-1", CurrencyNumber: 1m));
 

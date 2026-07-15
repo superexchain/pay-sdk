@@ -33,7 +33,7 @@ class H5OrderStatusRequestTest {
         ReturnResult<PayOrderAddressResp> resp = CLIENT.execute(
                 H5OrderStatusRequest.builder()
                         .protocol("TRC20")
-                        .currency("USDT")
+                        .currency("usdt")
                         .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
                         .companyUserId("88888896")
                         .token("20689544410874593281782112152726")

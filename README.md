@@ -80,7 +80,7 @@ import com.novax.sdk.pay.receipt.ReceiptOrderAddressResp;
 ReturnResult<ReceiptOrderAddressResp> result = client.execute(
     ReceiptAddOrderRequest.builder()
         .protocol("TRC20")
-        .currency("USDT")
+        .currency("usdt")
         .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
         .companyUserId("user-123")
         .receiptOrderId("order-001")
@@ -100,7 +100,7 @@ ReturnResult<WithdrawOrderResp> result = client.execute(
     WithdrawAddOrderRequest.builder()
         .withdrawOrderId("wd-001")
         .type(1)
-        .currency("USDT")
+        .currency("usdt")
         .protocol("TRC20")
         .address("TRecipientAddress...")
         .currencyNumber(new BigDecimal("30.00"))
@@ -169,7 +169,7 @@ from novax_sdk.pay.receipt import ReceiptAddOrderRequest
 result = client.execute(
     ReceiptAddOrderRequest(
         protocol="TRC20",
-        currency="USDT",
+        currency="usdt",
         smart_contract_address="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
         company_user_id="user-123",
         receipt_order_id="order-001",
@@ -189,7 +189,7 @@ result = client.execute(
     WithdrawAddOrderRequest(
         withdraw_order_id="wd-001",
         order_type=1,
-        currency="USDT",
+        currency="usdt",
         protocol="TRC20",
         address="TRecipientAddress...",
         currency_number=Decimal("30.00"),
@@ -259,7 +259,7 @@ if result.IsSuccess() {
 ```go
 result, err := client.Pay.ReceiptAddOrder(ctx, &novax.ReceiptAddOrderRequest{
     Protocol:             "TRC20",
-    Currency:             "USDT",
+    Currency:             "usdt",
     SmartContractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
     CompanyUserID:        "user-123",
     ReceiptOrderID:       "order-001",
@@ -274,7 +274,7 @@ result, err := client.Pay.ReceiptAddOrder(ctx, &novax.ReceiptAddOrderRequest{
 result, err := client.Pay.WithdrawAddOrder(ctx, &novax.WithdrawAddOrderRequest{
     WithdrawOrderID:      "wd-001",
     OrderType:            1,
-    Currency:             "USDT",
+    Currency:             "usdt",
     Protocol:             "TRC20",
     Address:              "TRecipientAddress...",
     CurrencyNumber:       decimal.NewFromFloat(30.0),
@@ -357,7 +357,7 @@ use novax_sdk::pay::receipt::ReceiptAddOrderRequest;
 
 let result = client.execute(&ReceiptAddOrderRequest {
     protocol:               "TRC20".into(),
-    currency:               "USDT".into(),
+    currency:               "usdt".into(),
     smart_contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t".into(),
     company_user_id:        "user-123".into(),
     receipt_order_id:       "order-001".into(),
@@ -374,7 +374,7 @@ use novax_sdk::pay::withdraw::WithdrawAddOrderRequest;
 let result = client.execute(&WithdrawAddOrderRequest {
     withdraw_order_id:      "wd-001".into(),
     order_type:             1,
-    currency:               "USDT".into(),
+    currency:               "usdt".into(),
     protocol:               "TRC20".into(),
     address:                "TRecipientAddress...".into(),
     currency_number:        Decimal::new(3000, 2),  // 30.00
@@ -436,7 +436,7 @@ var result = await client.Pay.ReceiptAddOrderAsync(
     new ReceiptAddOrderRequest
     {
         Protocol             = "TRC20",
-        Currency             = "USDT",
+        Currency             = "usdt",
         SmartContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
         CompanyUserId        = "user-123",
         ReceiptOrderId       = "order-001",
@@ -454,7 +454,7 @@ var result = await client.Pay.WithdrawAddOrderAsync(
     {
         WithdrawOrderId      = "wd-001",
         Type                 = 1,
-        Currency             = "USDT",
+        Currency             = "usdt",
         Protocol             = "TRC20",
         Address              = "TRecipientAddress...",
         CurrencyNumber       = 30.00m,

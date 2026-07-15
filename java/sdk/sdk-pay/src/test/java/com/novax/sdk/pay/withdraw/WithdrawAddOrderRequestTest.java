@@ -36,7 +36,7 @@ class WithdrawAddOrderRequestTest {
                 WithdrawAddOrderRequest.builder()
                         .withdrawOrderId(String.valueOf(System.currentTimeMillis()))
                         .type(1)
-                        .currency("USDT")
+                        .currency("usdt")
                         .protocol("TRC20")
                         .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
                         .address("TVKUpYxUV4LTdFZ24kNrvMm6phXx6vv7Zc")

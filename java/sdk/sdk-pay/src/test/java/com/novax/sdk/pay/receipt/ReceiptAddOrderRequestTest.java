@@ -35,7 +35,7 @@ class ReceiptAddOrderRequestTest {
         ReturnResult<ReceiptOrderAddressResp> resp = CLIENT.execute(
                 ReceiptAddOrderRequest.builder()
                         .protocol("TRC20")
-                        .currency("USDT")
+                        .currency("usdt")
                         .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
                         .companyUserId("88888896")
                         .receiptOrderId("1234")

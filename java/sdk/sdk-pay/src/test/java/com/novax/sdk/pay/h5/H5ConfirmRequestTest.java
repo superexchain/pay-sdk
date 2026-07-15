@@ -36,7 +36,7 @@ class H5ConfirmRequestTest {
         ReturnResult<Object> resp = CLIENT.execute(
                 H5ConfirmRequest.builder()
                         .protocol("TRC20")
-                        .currency("USDT")
+                        .currency("usdt")
                         .smartContractAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
                         .companyUserId("88888896")
                         .token("20689544410874593281782112152726")
